@@ -31,7 +31,7 @@
     <input type="submit" value="Add" />
 </form>
 
-<div class="lists">
+<div>
     <section>
         <h2>Nice List 😇</h2>
         <ul>
@@ -52,14 +52,17 @@
 
 <style>
     form,
-    .lists {
+    div {
         display: flex;
-        gap: 0.5rem;
     }
     input {
         min-width: 5rem;
     }
-    .lists > section {
+    section {
         flex: 1;
+    }
+    section ul {
+        list-style: none;
+        padding: 0;
     }
 </style>

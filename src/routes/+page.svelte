@@ -9,7 +9,11 @@
 <style>
     a {
         display: inline-block;
-        min-width: 2rem;
-        min-height: 2rem;
+        min-width: 2.5rem;
+        min-height: 2.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
     }
 </style>
