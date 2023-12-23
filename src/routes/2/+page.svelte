@@ -1,7 +1,7 @@
 <script>
     import { fade } from "svelte/transition";
     let cookieCount = 0;
-    let eating = false;
+    let eating;
 
     function add() {
         cookieCount++;
@@ -19,34 +19,21 @@
 </script>
 
 <h1>Day 2 - Merry Munch-o-Meter</h1>
-<h2>
+
+<div>
+    <span>🎅</span>
+    {#if eating}
+        <span transition:fade>🍪</span>
+    {/if}
+</div>
+
+<p>
     Santa has eaten {cookieCount}
     {cookieCount === 1 ? "cookie" : "cookies"}
-</h2>
+</p>
 
 <div>
     <button on:click={add}>add</button>
     <button on:click={remove}>remove</button>
     <button on:click={reset}>reset</button>
 </div>
-
-<div>
-    <span>🎅</span>
-    {#if eating}
-        <span transition:fade>🍪 CHOMP!</span>
-    {/if}
-</div>
-
-<style>
-    button {
-        margin: 0.25rem;
-        min-width: 8rem;
-        color: #000;
-    }
-
-    span {
-        display: inline-block;
-        padding: 1rem 0;
-        font-size: 3.2rem;
-    }
-</style>

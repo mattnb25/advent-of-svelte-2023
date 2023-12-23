@@ -18,7 +18,8 @@
     }
 
     function addChild(e) {
-        determineBehaviour(Object.fromEntries(new FormData(e.target)));
+        let newChild = new FormData(e.target);
+        determineBehaviour(Object.fromEntries(newChild));
     }
 </script>
 
@@ -31,47 +32,34 @@
 </form>
 
 <div class="lists">
-    <div>
+    <section>
         <h2>Nice List 😇</h2>
-        <ul class="nicelist">
+        <ul>
             {#each nicelist as child}
-                <li>{child.name} <span>({child.tally})</span></li>
+                <li>{child.name} {child.tally}</li>
             {/each}
         </ul>
-    </div>
-    <div>
+    </section>
+    <section>
         <h2>Naughty List 😡</h2>
-        <ul class="naughtylist">
+        <ul>
             {#each naughtylist as child}
-                <li>{child.name} <span>({child.tally})</span></li>
+                <li>{child.name} {child.tally}</li>
             {/each}
         </ul>
-    </div>
+    </section>
 </div>
 
 <style>
-    form {
-        padding-bottom: 1rem;
-        display: flex;
-        gap: 1rem;
-    }
-    form input {
-        padding: 0.5rem;
-        min-width: 5rem;
-        color: initial;
-    }
-
-    form input[type="submit"] {
-        min-width: fit-content;
-    }
-
+    form,
     .lists {
         display: flex;
+        gap: 0.5rem;
     }
-    .lists > div {
+    input {
+        min-width: 5rem;
+    }
+    .lists > section {
         flex: 1;
-    }
-    .lists ul li {
-        list-style-type: none;
     }
 </style>
