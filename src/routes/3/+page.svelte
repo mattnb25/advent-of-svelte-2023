@@ -43,7 +43,9 @@
 <h1>Day 3 - Jingle Bell Balancer</h1>
 
 {#if sleighWeight < 100}
-    <button type="submit" on:click={send}>Send Gifts 🦌🛷</button>
+    <button class="sleigh-button" type="submit" on:click={send}
+        >Send Gifts 🦌🛷</button
+    >
 {:else}
     <p>Remove weight to continue (100kg limit)</p>
 {/if}
@@ -67,3 +69,9 @@
         </button>
     {/each}
 </div>
+
+<style>
+    .sleigh-button {
+        font-size: large;
+    }
+</style>

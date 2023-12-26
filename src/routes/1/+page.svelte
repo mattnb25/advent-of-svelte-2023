@@ -33,7 +33,7 @@
 
 <div>
     <section>
-        <h2>Nice List 😇</h2>
+        <h2>Nice 😇</h2>
         <ul>
             {#each nicelist as child}
                 <li>{child.name} {child.tally}</li>
@@ -41,7 +41,7 @@
         </ul>
     </section>
     <section>
-        <h2>Naughty List 😡</h2>
+        <h2>Naughty 😡</h2>
         <ul>
             {#each naughtylist as child}
                 <li>{child.name} {child.tally}</li>
@@ -54,10 +54,17 @@
     form,
     div {
         display: flex;
+        justify-content: space-evenly;
     }
     input {
+        margin: 0.25rem;
         min-width: 5rem;
+        width: 100%;
     }
+    input[type="submit"] {
+        width: 50%;
+    }
+
     section {
         flex: 1;
     }

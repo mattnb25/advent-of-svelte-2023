@@ -37,3 +37,9 @@
     <button on:click={remove}>remove</button>
     <button on:click={reset}>reset</button>
 </div>
+
+<style>
+    span {
+        font-size: xx-large;
+    }
+</style>
