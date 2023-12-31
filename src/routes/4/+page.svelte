@@ -1,10 +1,10 @@
 <script>
     import { onDestroy, onMount } from "svelte";
 
-    let history = [];
-    $: currentBPM = history[history.length - 1] || 0;
+    let allHistory = [];
+    $: currentBPM = allHistory[allHistory.length - 1] || 0;
 
-    let period;
+    let minutesHistory;
     let averageBPM;
 
     onMount(() => {
@@ -13,22 +13,20 @@
                 "https://advent.sveltesociety.dev/data/2023/day-four.json",
             ).then((x) => x.json());
 
-            if (history.length >= 3600) history.shift();
-            history = [...history, res.heartRate];
+            if (allHistory.length >= 3600) allHistory.shift();
+            allHistory = [...allHistory, res.heartRate];
 
-            averageBPM = calculateBPM(period);
-            console.log(history);
+            averageBPM = calculateBPM(minutesHistory);
         }, 1000);
         return () => clearInterval(fetchHeartRate);
     });
 
     function calculateBPM(minutes) {
         let seconds = minutes * 60;
-        if (seconds < history.length) {
+
+        if (seconds < allHistory.length) {
             let sum = 0;
-            for (let i = 0; i < seconds; i++) {
-                sum += history[i];
-            }
+            for (let i = 0; i < seconds; i++) sum += allHistory[i];
             return sum / seconds;
         } else {
             return 0;
@@ -40,16 +38,16 @@
 <p>Current BPM: {currentBPM.toFixed(2)}</p>
 <input
     type="number"
-    bind:value={period}
+    bind:value={minutesHistory}
     placeholder="Type here to get an average"
     min="1"
     max="60"
 />
-{#if period}
+{#if minutesHistory}
     <p>
-        {period} minute average:
+        {minutesHistory} minute average:
         {#if averageBPM == 0}
-            please wait {period * 60 - history.length} seconds
+            please wait {minutesHistory * 60 - allHistory.length} seconds
         {:else}
             {averageBPM.toFixed(2)}
         {/if}

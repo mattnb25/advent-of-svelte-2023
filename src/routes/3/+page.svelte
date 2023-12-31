@@ -1,8 +1,9 @@
 <script>
     import { onMount } from "svelte";
+
     let warehouse = [];
-    let sleigh = [];
     let warehouseWeight = 0;
+    let sleigh = [];
     let sleighWeight = 0;
 
     onMount(async () => {
@@ -31,10 +32,8 @@
     }
 
     function send() {
-        if (sleighWeight > 100) {
-            console.log("Sleigh weight exceeded: ", sleighWeight);
-            return;
-        }
+        if (sleighWeight > 100) return;
+
         sleigh = [];
         sleighWeight = 0;
     }
@@ -43,15 +42,14 @@
 <h1>Day 3 - Jingle Bell Balancer</h1>
 
 {#if sleighWeight < 100}
-    <button class="sleigh-button" type="submit" on:click={send}
-        >Send Gifts 🦌🛷</button
-    >
+    <button class="sleigh-button" on:click={send}> Send Gifts 🦌🛷 </button>
 {:else}
     <p>Remove weight to continue (100kg limit)</p>
 {/if}
 
 <div class="sleigh">
     <h2>Sleigh: {sleighWeight.toFixed(2)}kg</h2>
+
     {#each sleigh as gift, index}
         <button on:click={() => unload(index, gift.weight)}>
             {gift.name}
@@ -62,6 +60,7 @@
 
 <div class="warehouse">
     <h2>Warehouse: {warehouseWeight.toFixed(2)}kg</h2>
+
     {#each warehouse as gift, index}
         <button on:click={() => load(index, gift.weight)}>
             {gift.name}

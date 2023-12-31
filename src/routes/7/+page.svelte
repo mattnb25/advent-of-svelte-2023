@@ -55,9 +55,7 @@
     }
 
     function play() {
-        if (audioCtx) {
-            audioCtx.close();
-        }
+        if (audioCtx) audioCtx.close();
         audioCtx = new AudioContext();
 
         output.split("").forEach((note, i) => {
@@ -65,7 +63,7 @@
             o.connect(audioCtx.destination);
 
             const speed = 5;
-            const start = audioCtx.currentTime + i / speed;
+            const start = i / speed;
 
             if (note === ".") {
                 o.start(start);
@@ -78,15 +76,14 @@
     }
 
     onDestroy(() => {
-        if (audioCtx) {
-            audioCtx.close();
-        }
+        if (audioCtx) audioCtx.close();
     });
 </script>
 
 <h1>Day 7 - Morse Mischief</h1>
 
-<textarea bind:value={input} rows="5" placeholder="Type here"></textarea>
+<textarea bind:value={input} maxlength="1000" placeholder="Type here"
+></textarea>
 
 <h2>Morse</h2>
 <p>{output}</p>
