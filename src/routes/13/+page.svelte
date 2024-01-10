@@ -1,27 +1,32 @@
 <script>
     import { onMount } from "svelte";
 
+    // the groups of gifts, each should have < 100kg of gifts
     let sleighs = [];
 
     onMount(async () => {
-        const warehouse = await fetch(
+        await fetch(
             "https://advent.sveltesociety.dev/data/2023/day-thirteen.json",
-        ).then((x) => x.json());
+        )
+            .then((data) => data.json())
+            .then((data) => {
+                // track each load and its weight
+                let currentLoad = [];
+                let weight = 0;
 
-        let load = [];
-        let weight = 0;
+                data.forEach((gift) => {
+                    weight += gift.weight;
 
-        warehouse.forEach((gift) => {
-            weight += gift.weight;
+                    if (weight > 100) {
+                        sleighs = [...sleighs, currentLoad]; // add the current load to the list of sleighs
+                        weight = gift.weight; // include the current gift instead of resetting to 0
+                        currentLoad = []; // reset current load
+                    }
 
-            if (weight > 100) {
-                sleighs = [...sleighs, load];
-                load = [];
-                weight = 0;
-            }
-
-            load = [...load, gift];
-        });
+                    // add the gift to the current load
+                    currentLoad = [...currentLoad, gift];
+                });
+            });
     });
 </script>
 
@@ -34,7 +39,7 @@
 {#each sleighs as sleigh, index}
     <h2>Sleigh {index + 1}</h2>
     {#each sleigh as gift}
-        <p>{gift.name} - {gift.weight}kg</p>
+        <p>{gift.name}: {gift.weight}kg</p>
     {/each}
 {/each}
 

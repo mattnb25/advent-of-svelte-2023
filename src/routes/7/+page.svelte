@@ -1,6 +1,7 @@
 <script>
     import { onDestroy } from "svelte";
 
+    // user input, Morse code output, global audio context, and Morse code dictionary
     let input;
     let output;
     let audioCtx;
@@ -44,6 +45,7 @@
         " ": "/",
     };
 
+    // convert input to Morse code whenever it changes
     $: if (input) {
         output = input
             .toUpperCase()
@@ -54,16 +56,18 @@
         output = "Waiting for input";
     }
 
+    // play audio based on the Morse code output
     function play() {
-        if (audioCtx) audioCtx.close();
-        audioCtx = new AudioContext();
+        if (audioCtx) audioCtx.close(); // close any existing audio context
+        audioCtx = new AudioContext(); // create a new audio context
 
         output.split("").forEach((note, i) => {
+            // create an oscillator for each character
             const o = audioCtx.createOscillator();
             o.connect(audioCtx.destination);
 
-            const speed = 5;
-            const start = i / speed;
+            const speed = 5; // optionally increases the speed of playback
+            const start = i / speed; // playback time is based on its index
 
             if (note === ".") {
                 o.start(start);
@@ -75,6 +79,7 @@
         });
     }
 
+    // stop audio when the component is destroyed
     onDestroy(() => {
         if (audioCtx) audioCtx.close();
     });

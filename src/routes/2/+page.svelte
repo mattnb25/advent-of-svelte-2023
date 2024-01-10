@@ -1,18 +1,25 @@
 <script>
     import { fade } from "svelte/transition";
+
+    // cookie count and eating state
     let cookieCount = 0;
     let eating;
 
     function add() {
+        // update count and eating state
         cookieCount++;
         eating = true;
+
+        // delay for half a second to simulate eating time
         setTimeout(() => {
             eating = false;
         }, 500);
     }
+
     function remove() {
         cookieCount--;
     }
+
     function reset() {
         cookieCount = 0;
     }

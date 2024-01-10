@@ -5,10 +5,11 @@
         fetch("https://advent.sveltesociety.dev/data/2023/day-eleven.json")
             .then((x) => x.json())
             .then((elfNames) => {
+                // extract all first and last names from the JSON data
                 let firstNames = elfNames.firstNames;
                 let lastNames = elfNames.lastNames;
 
-                // filter names by initials
+                // filter names to only include those that match the user's initials
                 firstNames = firstNames.filter(
                     (name) =>
                         name[0].toUpperCase() === firstName[0].toUpperCase(),
@@ -18,7 +19,7 @@
                         name[0].toUpperCase() === lastName[0].toUpperCase(),
                 );
 
-                // select name by random index
+                // select a random name from each filtered list, providing default fallbacks
                 const elfFirstName =
                     firstNames[Math.floor(Math.random() * firstNames.length)] ||
                     "Twinkle";
@@ -27,8 +28,7 @@
                     "McJingles";
 
                 elfName = elfFirstName + " " + elfLastName;
-            })
-            .catch((elfName = "(an error occured)"));
+            });
     }
 </script>
 

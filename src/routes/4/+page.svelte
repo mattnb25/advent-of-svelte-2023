@@ -1,61 +1,71 @@
 <script>
-    import { onDestroy, onMount } from "svelte";
+    import { onMount } from "svelte";
 
-    let allHistory = [];
-    $: currentBPM = allHistory[allHistory.length - 1] || 0;
+    // BPM history in seconds and latest reading
+    let BPMHistory = [];
+    $: BPMlatest = BPMHistory[BPMHistory.length - 1] || 0;
 
-    let minutesHistory;
+    // subset of history in minutes and BPM average based on that value
+    let selectedMinutes;
     let averageBPM;
 
     onMount(() => {
-        const fetchHeartRate = setInterval(async () => {
+        const interval = setInterval(async () => {
+            // fetch heart rate data every second
             const res = await fetch(
                 "https://advent.sveltesociety.dev/data/2023/day-four.json",
             ).then((x) => x.json());
 
-            if (allHistory.length >= 3600) allHistory.shift();
-            allHistory = [...allHistory, res.heartRate];
+            // Keep only the last hour of data
+            if (BPMHistory.length >= 3600) BPMHistory.shift();
+            BPMHistory = [...BPMHistory, res.heartRate];
 
-            averageBPM = calculateBPM(minutesHistory);
+            // Update the average BPM with new data
+            averageBPM = calculateBPM(selectedMinutes);
         }, 1000);
-        return () => clearInterval(fetchHeartRate);
+
+        return () => clearInterval(interval);
     });
 
     function calculateBPM(minutes) {
         let seconds = minutes * 60;
 
-        if (seconds < allHistory.length) {
-            let sum = 0;
-            for (let i = 0; i < seconds; i++) sum += allHistory[i];
-            return sum / seconds;
-        } else {
-            return 0;
-        }
+        // ensure enough data for the calculation
+        if (seconds > BPMHistory.length) return null;
+
+        // calculate the average BPM
+        let sum = 0;
+        for (let i = 0; i < seconds; i++) sum += BPMHistory[i];
+        return sum / seconds;
     }
 </script>
 
 <h1>Day 4 - Heart of Christmas</h1>
-<p>Current BPM: {currentBPM.toFixed(2)}</p>
+
+<p>
+    Current BPM: {BPMlatest.toFixed() <= 0 ? "loading..." : BPMlatest.toFixed()}
+</p>
 <input
     type="number"
-    bind:value={minutesHistory}
-    placeholder="Type here to get an average"
+    bind:value={selectedMinutes}
+    placeholder="Input minutes here to get an average"
     min="1"
     max="60"
 />
-{#if minutesHistory}
+
+{#if selectedMinutes}
     <p>
-        {minutesHistory} minute average:
-        {#if averageBPM == 0}
-            please wait {minutesHistory * 60 - allHistory.length} seconds
+        {selectedMinutes} minute average:
+        {#if !averageBPM}
+            please wait {selectedMinutes * 60 - BPMHistory.length} seconds
         {:else}
-            {averageBPM.toFixed(2)}
+            {averageBPM.toFixed()}
         {/if}
     </p>
 {/if}
 
 <style>
     input {
-        min-width: 15rem;
+        min-width: 100%;
     }
 </style>

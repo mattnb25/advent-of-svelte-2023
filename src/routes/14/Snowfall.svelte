@@ -1,16 +1,20 @@
 <script>
-    export let speed = 50;
-    export let quantity = 50;
+    export let speed = 50; // snowfall speed
+    export let quantity = 50; // snowflake quantity
 
+    // collection of snowflakes with random positions
     $: snowflakes = Array.from({ length: quantity }, () => ({
         x: Math.random() * 100,
         y: Math.random() * 100,
     }));
 </script>
 
+<!-- wrapper that covers the entire viewport -->
 <div class="wrapper">
+    <!-- contains a layer of snowflakes twice the height of the viewport -->
     <div class="snowflakes" style="animation-duration: {100 - speed}s">
         {#each snowflakes as snowflake}
+            <!-- create initial snowflakes -->
             <span
                 class="snowflake"
                 style="
@@ -18,6 +22,7 @@
                 left: {snowflake.x}%;
                 "
             ></span>
+            <!-- duplicate initial snowflakes to appear when scrolled down-->
             <span
                 class="snowflake"
                 style="
@@ -35,6 +40,8 @@
         z-index: -1;
         top: 0;
         left: 0;
+        height: 100dvh;
+        width: 100dvw;
         overflow: hidden;
     }
 
@@ -48,8 +55,7 @@
     }
     .snowflakes {
         position: relative;
-        height: 100dvh;
-        width: 100dvw;
+        height: 100%;
         animation: scroll linear infinite;
     }
     .snowflake {

@@ -7,24 +7,32 @@
         );
     }
 
+    // the current selected image during drag-and-drop
     let selectedImage;
 
     function dragStart(event) {
+        // copy the dragged image to avoid removing it from the palette
         selectedImage = event.target.cloneNode(true);
     }
 
-    function dragOver(event) {
-        event.preventDefault();
-    }
-
     function drop(event) {
+        // required to prevent default iOS behaviour
         event.preventDefault();
-        if (selectedImage) {
-            const x = event.clientX - event.target.getBoundingClientRect().left;
-            const y = event.clientY - event.target.getBoundingClientRect().top;
 
-            selectedImage.style.left = `${x}px`;
-            selectedImage.style.top = `${y}px`;
+        if (selectedImage) {
+            // mouse coordinates relative to the card's top-left corner
+            const cardOffsetX =
+                event.clientX - event.target.getBoundingClientRect().left;
+            const cardOffsetY =
+                event.clientY - event.target.getBoundingClientRect().top;
+
+            // dimensions of the card
+            const cardWidth = event.target.offsetWidth;
+            const cardHeight = event.target.offsetHeight;
+
+            // calculate and set position using percentages
+            selectedImage.style.left = `${(cardOffsetX / cardWidth) * 100}%`;
+            selectedImage.style.top = `${(cardOffsetY / cardHeight) * 100}%`;
 
             event.target.appendChild(selectedImage);
             selectedImage = null;
@@ -33,7 +41,9 @@
 </script>
 
 <h1>Day 12 - Greetings and salutations</h1>
+
 <h2>Palette</h2>
+<p>(on mobile devices tap and hold to drag)</p>
 <div role="listbox" class="palette">
     {#each imageURLs as url}
         <img src={url} alt="" draggable="true" on:dragstart={dragStart} />
@@ -41,7 +51,7 @@
 </div>
 
 <h2>Card</h2>
-<div role="presentation" class="card" on:dragover={dragOver} on:drop={drop}>
+<div role="presentation" class="card" on:dragover|preventDefault on:drop={drop}>
     <p>Merry Christmas</p>
 </div>
 
@@ -52,9 +62,8 @@
         overflow-x: auto;
     }
     .palette img {
-        object-fit: contain;
         height: 2.5rem;
-        width: 2.5rem;
+        margin-bottom: 1rem;
     }
 
     .card {
@@ -63,19 +72,16 @@
         height: 25rem;
     }
     .card > * {
+        height: 2.5rem;
         position: absolute;
         transform: translate(-50%, -50%);
     }
     .card p {
-        font-size: xx-large;
-        text-align: center;
         pointer-events: none;
-        background-color: #ffffffaa;
-        backdrop-filter: blur(2.5px);
-
-        z-index: 1;
-        top: 50%;
+        font-size: xx-large;
+        white-space: nowrap;
+        bottom: 0%;
         left: 50%;
-        transform: translate(-50%, -100%);
+        z-index: 1;
     }
 </style>

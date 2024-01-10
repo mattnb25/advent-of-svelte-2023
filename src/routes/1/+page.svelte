@@ -1,22 +1,27 @@
 <script>
     import { onMount } from "svelte";
-    let nicelist = [];
-    let naughtylist = [];
 
+    // lists to store children based on their behavior
+    let niceChildren = [];
+    let naughtyChildren = [];
+
+    // fetch initial data, parse it, then process it on component mount
     onMount(async () => {
-        const list = await fetch(
-            "https://advent.sveltesociety.dev/data/2023/day-one.json",
-        ).then((x) => x.json());
-
-        list.forEach((child) => determineBehaviour(child));
+        await fetch("https://advent.sveltesociety.dev/data/2023/day-one.json")
+            .then((data) => data.json())
+            .then((data) => {
+                data.forEach((child) => determineBehaviour(child));
+            });
     });
 
+    // assign child to the appropriate list based on tally
     function determineBehaviour(child) {
         child.tally > 0
-            ? (nicelist = [...nicelist, child])
-            : (naughtylist = [...naughtylist, child]);
+            ? (niceChildren = [...niceChildren, child])
+            : (naughtyChildren = [...naughtyChildren, child]);
     }
 
+    // use form input to add a new child to the appropriate list
     function addChild(e) {
         let newChild = new FormData(e.target);
         determineBehaviour(Object.fromEntries(newChild));
@@ -31,11 +36,11 @@
     <input type="submit" value="Add" />
 </form>
 
-<div>
+<div class="lists">
     <section>
         <h2>Nice 😇</h2>
         <ul>
-            {#each nicelist as child}
+            {#each niceChildren as child}
                 <li>{child.name} {child.tally}</li>
             {/each}
         </ul>
@@ -43,28 +48,28 @@
     <section>
         <h2>Naughty 😡</h2>
         <ul>
-            {#each naughtylist as child}
+            {#each naughtyChildren as child}
                 <li>{child.name} {child.tally}</li>
             {/each}
         </ul>
     </section>
 </div>
 
+{#if niceChildren.length === 0 || naughtyChildren.length === 0}
+    <p>loading...</p>
+{/if}
+
 <style>
-    form,
-    div {
+    input {
+        display: block;
+        margin: 0.5rem 0;
+        width: 100%;
+    }
+
+    .lists {
         display: flex;
         justify-content: space-evenly;
     }
-    input {
-        margin: 0.25rem;
-        min-width: 5rem;
-        width: 100%;
-    }
-    input[type="submit"] {
-        width: 50%;
-    }
-
     section {
         flex: 1;
     }

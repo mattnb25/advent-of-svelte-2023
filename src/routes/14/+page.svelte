@@ -15,6 +15,9 @@
 <Snowfall {speed} {quantity}></Snowfall>
 
 <style>
+    label {
+        display: block;
+    }
     input {
         margin-bottom: 1rem;
     }
