@@ -59,6 +59,8 @@
         {Math.trunc((Date.now() - startTime) / 1000)}
         seconds
     </h2>
+{:else}
+    <p>Match the cards:</p>
 {/if}
 
 <div class="grid">

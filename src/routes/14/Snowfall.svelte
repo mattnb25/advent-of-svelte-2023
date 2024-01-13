@@ -40,17 +40,17 @@
         z-index: -1;
         top: 0;
         left: 0;
-        height: 100dvh;
-        width: 100dvw;
+        height: 100%;
+        width: 100%;
         overflow: hidden;
     }
 
     @keyframes scroll {
         0% {
-            transform: translateY(0);
+            top: 0;
         }
         100% {
-            transform: translateY(100%);
+            top: 100%;
         }
     }
     .snowflakes {
@@ -60,7 +60,8 @@
     }
     .snowflake {
         position: absolute;
-        background-color: black;
+        background-color: white;
+        box-shadow: 0 0 0.5rem 0.1rem #000;
         height: 0.25rem;
         width: 0.25rem;
     }
