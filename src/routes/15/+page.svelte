@@ -1,12 +1,17 @@
 <script>
     import Snowfall from "../14/Snowfall.svelte";
 
+    // reactive values
     let speed, quantity, files, imgSrc;
 
     function updateImg() {
+        // read file as base64 encoded string
         const reader = new FileReader();
         reader.readAsDataURL(files[0]);
+
+        // run when FileReader reading is complete
         reader.onload = (e) => {
+            // e.target.result contains the DataURL result
             imgSrc = e.target.result;
         };
     }
@@ -21,13 +26,7 @@
 <input type="range" id="quantity" bind:value={quantity} min="1" max="99" />
 
 <label for="img">Upload an image:</label>
-<input
-    type="file"
-    id="img"
-    accept="image/*"
-    bind:files
-    on:change={updateImg}
-/>
+<input type="file" id="img" accept="image/*" bind:files on:change={updateImg} />
 
 <div class="globe">
     <img src={imgSrc} alt="" />
@@ -41,7 +40,7 @@
     input {
         margin-bottom: 1rem;
     }
-    input[type='file'] {
+    input[type="file"] {
         margin-top: 0.5rem;
     }
 
