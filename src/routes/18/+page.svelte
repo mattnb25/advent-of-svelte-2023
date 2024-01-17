@@ -41,7 +41,7 @@
 </p>
 
 {#if currentIndex === questions.length}
-    <p>You've completed the quiz!</p>
+    <p>There are no questions left.</p>
 {/if}
 
 <style>

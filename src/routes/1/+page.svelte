@@ -6,8 +6,8 @@
     let naughtyChildren = [];
 
     // fetch initial data, parse it, then process it on component mount
-    onMount(async () => {
-        await fetch("https://advent.sveltesociety.dev/data/2023/day-one.json")
+    onMount(() => {
+        fetch("https://advent.sveltesociety.dev/data/2023/day-one.json")
             .then((data) => data.json())
             .then((data) => {
                 data.forEach((child) => determineBehaviour(child));
@@ -61,9 +61,7 @@
 
 <style>
     input {
-        display: block;
         margin: 0.5rem 0;
-        width: 100%;
     }
 
     .lists {
