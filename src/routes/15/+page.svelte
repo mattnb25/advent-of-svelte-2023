@@ -25,7 +25,7 @@
 <label for="quantity">Quantity</label>
 <input type="range" id="quantity" bind:value={quantity} min="1" max="99" />
 
-<label for="img">Upload an image:</label>
+<label for="img">Snowglobe background:</label>
 <input type="file" id="img" accept="image/*" bind:files on:change={updateImg} />
 
 <div class="globe">

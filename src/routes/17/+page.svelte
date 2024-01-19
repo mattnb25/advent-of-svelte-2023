@@ -13,7 +13,10 @@
 </script>
 
 <h1>Day 17 - Festive Funds</h1>
-<label for="budget">Budget: </label>
+<p>Manage your budget with this simple tool.</p>
+
+<h2>Budget</h2>
+<label for="budget">Budget limit: </label>
 <input type="number" id="budget" bind:value={limit} />
 <p>Total budget remaining: ${(limit - spent).toFixed(2)}</p>
 
@@ -25,7 +28,7 @@
     <label for="cost">Cost</label>
     <input type="number" name="cost" id="cost" />
 
-    <input type="submit" value="Add" />
+    <input type="submit" value="Track expense" />
 </form>
 
 {#each expenses as expense}
@@ -35,6 +38,9 @@
 <style>
     input {
         display: block;
-        margin: 0.5rem 0;
+        margin: 0.25rem 0;
+    }
+    input[type="submit"] {
+        margin: 1rem 0;
     }
 </style>

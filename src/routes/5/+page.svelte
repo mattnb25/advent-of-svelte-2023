@@ -61,28 +61,31 @@
 </script>
 
 <h1>Day 5 - Present Progress</h1>
+<p>This page shows statistics for Santa's elves.</p>
 
-<div>
+<h2>Overall Statistics</h2>
+<div class="overview">
     <p>Gifts created: {overview.wrapTotal}</p>
     <p>Gifts wrapped: {overview.giftTotal}</p>
     <p>
-        Average wrapping time:
+        Average wrap time:
         {(overview.wrapTime / overview.wrapTotal).toFixed(2)} minutes
     </p>
     <p>
-        Average creation time:
+        Average build time:
         {(overview.makeTime / overview.giftTotal).toFixed(2)} minutes
     </p>
 </div>
 
+<h2>Personal Statistics</h2>
 <table>
     <thead>
         <tr>
-            <th>Elf Name</th>
+            <th>Name</th>
             <th>Gifts wrapped</th>
-            <th>Gifts made</th>
-            <th>Avg Wrap Time (personal)</th>
-            <th>Avg Creation Time (personal)</th>
+            <th>Gifts built</th>
+            <th>Average wrap time</th>
+            <th>Average build time</th>
         </tr>
     </thead>
 
@@ -92,14 +95,17 @@
                 <td>{name}</td>
                 <td>{elf.wrapTotal}</td>
                 <td>{elf.giftTotal}</td>
-                <td>{(elf.wrapTime / elf.wrapTotal).toFixed(2)} minutes</td>
-                <td>{(elf.makeTime / elf.giftTotal).toFixed(2)} minutes</td>
+                <td>{(elf.wrapTime / elf.wrapTotal).toFixed(2)}m</td>
+                <td>{(elf.makeTime / elf.giftTotal).toFixed(2)}m</td>
             </tr>
         {/each}
     </tbody>
 </table>
 
 <style>
+    .overview p {
+        margin: 0;
+    }
     table {
         display: block;
         overflow-x: auto;

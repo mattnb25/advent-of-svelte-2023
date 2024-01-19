@@ -31,10 +31,10 @@
 </script>
 
 <h1>Day 13 - Jingle Bell Balancer 2.0</h1>
-
-{#if sleighs.length === 0}
-    <p>loading...</p>
-{/if}
+<p>
+    Each sleigh here contains less than 100kg of gifts for Santa to carry on a
+    single trip.
+</p>
 
 {#each sleighs as sleigh, index}
     <h2>Sleigh {index + 1}</h2>

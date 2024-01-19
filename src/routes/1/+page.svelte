@@ -29,6 +29,7 @@
 </script>
 
 <h1>Day 1 - Naughty or Nice</h1>
+<p>This tool categorizes children as nice or naughty.</p>
 
 <form on:submit|preventDefault={addChild}>
     <input type="text" name="name" placeholder="Name" required />

@@ -43,12 +43,14 @@
 <h1>Day 4 - Heart of Christmas</h1>
 
 <p>
-    Current BPM: {BPMlatest.toFixed() <= 0 ? "loading..." : BPMlatest.toFixed()}
+    Santa's current BPM: {BPMlatest.toFixed() <= 0
+        ? "loading..."
+        : BPMlatest.toFixed()}
 </p>
 <input
     type="number"
     bind:value={selectedMinutes}
-    placeholder="Input minutes here to get an average"
+    placeholder="Input minutes here to get an average BPM"
     min="1"
     max="60"
 />

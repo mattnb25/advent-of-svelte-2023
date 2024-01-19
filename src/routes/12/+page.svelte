@@ -51,6 +51,7 @@
 </div>
 
 <h2>Card</h2>
+<p>Drag items from the palette onto this area to create a personalized card.</p>
 <div role="presentation" class="card" on:dragover|preventDefault on:drop={drop}>
     <p>Merry Christmas</p>
 </div>

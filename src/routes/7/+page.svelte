@@ -87,7 +87,10 @@
 
 <h1>Day 7 - Morse Mischief</h1>
 
-<textarea bind:value={input} maxlength="1000" placeholder="Type here"
+<textarea
+    bind:value={input}
+    maxlength="1000"
+    placeholder="Type here to convert your text into Morse code"
 ></textarea>
 
 <h2>Morse</h2>

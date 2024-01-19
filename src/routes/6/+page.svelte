@@ -11,6 +11,7 @@
 </script>
 
 <h1>Day 6 - Misteltoe Metronome</h1>
+<p>This tool measures the intervals between clicks.</p>
 
 <button class="tap" on:click={tap}>
     <span>(TAP)</span>

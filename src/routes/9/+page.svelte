@@ -29,7 +29,7 @@
 </script>
 
 <h1>Day 9 - Santa's Final Countdown</h1>
-<p>Christmas 2023:</p>
+<p>Christmas 2023 was in:</p>
 {#if countdown}
     <p class="timer">{countdown}</p>
 {/if}

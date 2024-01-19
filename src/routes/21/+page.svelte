@@ -27,5 +27,5 @@
     <p>🍃 Wind Speed: {weather.wind_speed_10m}km/h</p>
     <p>➡️ Wind Direction: {weather.wind_direction_10m}°</p>
 {:else}
-    <p>Loading... Please enable location access.</p>
+    <p>Attempting to load. Please enable location access.</p>
 {/if}
