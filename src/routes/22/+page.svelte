@@ -53,6 +53,7 @@
         scale: -1 1;
         transform-origin: center;
     }
+    /* rotate might not work in safari */
     .rotated-tree {
         rotate: calc(360deg / var(--tree-count) * var(--index));
         transform-origin: center;

@@ -45,6 +45,7 @@
 <h2>Palette</h2>
 <p>(on mobile devices tap and hold to drag)</p>
 <div role="listbox" class="palette">
+    <!-- drag might not work on Chrome on Android -->
     {#each imageURLs as url}
         <img src={url} alt="" draggable="true" on:dragstart={dragStart} />
     {/each}
