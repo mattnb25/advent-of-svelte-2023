@@ -65,9 +65,3 @@
         {/if}
     </p>
 {/if}
-
-<style>
-    input {
-        min-width: 100%;
-    }
-</style>

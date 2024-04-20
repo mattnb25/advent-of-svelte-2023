@@ -38,7 +38,7 @@
     <p>Enter your name below to convert it into an elf name.</p>
     <input type="text" placeholder="First" bind:value={firstName} required />
     <input type="text" placeholder="Last" bind:value={lastName} required />
-    <button type="submit" on:click={getName}>Go</button>
+    <input type="submit" on:click={getName} value="Go" />
 </form>
 
 <p>Your elf name is: {elfName || "waiting..."}</p>

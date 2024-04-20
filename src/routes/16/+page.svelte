@@ -23,16 +23,6 @@
 
 <h1>Day 16 - Lessons from Amazon ™️</h1>
 
-<h2>Hangar</h2>
-<p>Click on a cell to inspect its contents.</p>
-<div class="hangar">
-    {#each hangar as row}
-        {#each row as cell}
-            <button class="cell" on:click={() => (currentCell = cell)}></button>
-        {/each}
-    {/each}
-</div>
-
 <h2>Cell Content</h2>
 {#if !currentCell || currentCell.length === 0}
     <p>No gifts found.</p>
@@ -42,22 +32,41 @@
     {/each}
 {/if}
 
+<h2>Hangar</h2>
+<p>Click on a cell to inspect its contents.</p>
+<div class="hangar">
+    {#each hangar as row}
+        {#each row as cell}
+            <span
+                role="button"
+                tabindex="0"
+                class="cell"
+                on:keydown={() => (currentCell = cell)}
+                on:click={() => (currentCell = cell)}
+            ></span>
+        {/each}
+    {/each}
+</div>
+
 <style>
     .hangar {
         display: grid;
-        max-width: 20rem;
-        aspect-ratio: 1/1;
-        overflow: auto;
+        gap: 0.1rem;
         grid-template-rows: repeat(21, 1fr);
         grid-template-columns: repeat(21, 1fr);
+
+        overflow: auto;
+        width: min-content;
+        max-width: 100%;
     }
     .cell {
-        margin: 0;
         cursor: pointer;
-        border: 1px solid white;
-        background-color: black;
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius: 0;
+        background-color: royalblue;
     }
     .cell:hover {
-        background-color: white;
+        background-color: aliceblue;
     }
 </style>

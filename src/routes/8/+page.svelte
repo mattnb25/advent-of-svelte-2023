@@ -68,6 +68,7 @@
         <button on:click={() => select(card)} disabled={card.matched}>
             <img
                 src={card.img}
+                loading="lazy"
                 alt="card"
                 style:filter={card.selected || card.matched
                     ? "none"

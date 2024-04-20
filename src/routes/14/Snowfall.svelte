@@ -47,10 +47,10 @@
 
     @keyframes scroll {
         0% {
-            top: 0;
+            transform: translateY(0%);
         }
         100% {
-            top: 100%;
+            transform: translateY(100%);
         }
     }
     .snowflakes {
@@ -61,8 +61,9 @@
     .snowflake {
         position: absolute;
         background-color: white;
-        box-shadow: 0 0 0.5rem 0.1rem #000;
+        box-shadow: 0 0 0.5rem 0.1rem #333a;
         height: 0.25rem;
         width: 0.25rem;
+        border-radius: 0.5rem;
     }
 </style>

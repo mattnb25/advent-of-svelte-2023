@@ -53,9 +53,12 @@
 
 <h2>Card</h2>
 <p>Drag items from the palette onto this area to create a personalized card.</p>
-<div role="presentation" class="card" on:dragover|preventDefault on:drop={drop}>
-    <p>Merry Christmas</p>
-</div>
+<div
+    role="presentation"
+    class="card"
+    on:dragover|preventDefault
+    on:drop={drop}
+></div>
 
 <style>
     .palette {
@@ -71,19 +74,13 @@
     .card {
         position: relative;
         border: 1px solid black;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 1rem 0.1rem #3333;
         height: 25rem;
     }
-    .card > * {
+    :global(.card > img) {
         height: 2.5rem;
         position: absolute;
         transform: translate(-50%, -50%);
-    }
-    .card p {
-        pointer-events: none;
-        font-size: xx-large;
-        white-space: nowrap;
-        bottom: 0%;
-        left: 50%;
-        z-index: 1;
     }
 </style>

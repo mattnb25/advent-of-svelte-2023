@@ -62,6 +62,8 @@
         box-shadow: 0 0 1rem 0.1rem;
     }
     .lights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
         padding-top: 2.5rem;
     }
 </style>

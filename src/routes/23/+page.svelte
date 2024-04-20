@@ -36,13 +36,14 @@
 
 <style>
     .post {
-        border: 1px solid gray;
+        border: 1px solid #333;
+        border-radius: 0.5rem;
         padding: 1rem;
         margin-bottom: 1rem;
     }
 
     .comment {
-        border-left: 1px solid gray;
-        padding-left: 1rem;
+        border-left: 1px solid #333;
+        padding-left: 1.5rem;
     }
 </style>

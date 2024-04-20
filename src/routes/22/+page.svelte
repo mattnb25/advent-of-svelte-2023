@@ -7,13 +7,7 @@
 >
 <input type="text" id="name" bind:value={name} placeholder="Name" />
 
-<svg
-    style="--tree-count: {name.length}"
-    viewBox="0 0 100 100"
-    width="10rem"
-    height="10rem"
-    role="img"
->
+<svg viewBox="0 0 100 100" width="10rem" height="10rem" role="img">
     <title>A Snowflake</title>
 
     <g class="snowflake">
@@ -32,9 +26,18 @@
     </g>
     <!-- intentionally simple due to time, snowflake variablility depends only on name length -->
     {#each Array(name.length) as _, i}
-        <use href="#tree" style="--index: {i + 1};" class="rotated-tree" />
+        <!-- divide 360 by length to get a base ratio, then use index as a multiplier -->
+        <use
+            href="#tree"
+            style="transform: rotate({(360 / name.length) * (i + 1)}deg);"
+            class="rotated-tree"
+        />
         <!-- Duplicate tree only for a thicker density aesthetic -->
-        <use href="#tree" style="--index: {i + 1.5};" class="rotated-tree" />
+        <use
+            href="#tree"
+            style="transform: rotate({(360 / name.length) * (i + 1.5)}deg);"
+            class="rotated-tree"
+        />
     {/each}
 </svg>
 
@@ -44,7 +47,8 @@
         display: block;
     }
     svg {
-        margin: 1rem 0;
+        display: block;
+        margin: 1rem auto;
     }
     line {
         stroke: #000;
@@ -53,9 +57,8 @@
         scale: -1 1;
         transform-origin: center;
     }
-    /* rotate might not work in safari */
+    /* rotate might not work on all browsers */
     .rotated-tree {
-        rotate: calc(360deg / var(--tree-count) * var(--index));
         transform-origin: center;
     }
 </style>

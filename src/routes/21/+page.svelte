@@ -14,18 +14,22 @@
             )
                 .then((res) => res.json())
                 .then((res) => (weather = res.current)); // store a portion of the data
+            console.log("sdf");
         });
     });
 </script>
 
 <h1>Day 21 - Oh the weather outside is frightful</h1>
 
-{#if weather}
-    <h2>Weather at {latitude || ""} {longitude || "..."}</h2>
+{#if !weather}
+    <p>Attempting to load. Please enable location access.</p>
+{:else}
+    <h2>
+        Weather at {latitude.toFixed(5)}
+        {longitude.toFixed(5)}
+    </h2>
     <p>🌡️ Temperature: {weather.temperature_2m}°C</p>
     <p>❄️ Snowfall: {weather.snowfall}cm</p>
     <p>🍃 Wind Speed: {weather.wind_speed_10m}km/h</p>
     <p>➡️ Wind Direction: {weather.wind_direction_10m}°</p>
-{:else}
-    <p>Attempting to load. Please enable location access.</p>
 {/if}

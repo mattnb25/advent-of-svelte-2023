@@ -4,7 +4,7 @@
     <a href="https://advent.sveltesociety.dev/" target="_blank">
         The Challenges
     </a>
-    <a href="https://github.com/MNB-87/advent-of-svelte-2023" target="_blank">
+    <a href="https://github.com/mattnb25/advent-of-svelte-2023" target="_blank">
         Source (GitHub)
     </a>
 </div>
@@ -44,7 +44,7 @@
         aspect-ratio: 1/1;
     }
     a {
-        color: black;
+        color: #333;
     }
     span {
         color: #ccc;

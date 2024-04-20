@@ -26,9 +26,9 @@
     <input type="text" name="name" id="name" />
 
     <label for="cost">Cost</label>
-    <input type="number" name="cost" id="cost" />
+    <input type="number" required name="cost" id="cost" />
 
-    <input type="submit" value="Track expense" />
+    <input type="submit" required value="Track expense" />
 </form>
 
 {#each expenses as expense}

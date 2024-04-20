@@ -9,8 +9,7 @@
     const minuteInMs = 1000 * 60;
     const secondInMs = 1000;
 
-    // update the countdown every second
-    const interval = setInterval(() => {
+    let updateCountdown = () => {
         const midnightTime = new Date("Dec 24, 2023 23:59:59").getTime();
         const currentTime = new Date().getTime();
         const remainingTime = midnightTime - currentTime;
@@ -21,7 +20,13 @@
         const seconds = Math.floor((remainingTime % minuteInMs) / secondInMs);
 
         countdown = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
+    };
+
+    // start instantly
+    updateCountdown();
+
+    // update the countdown every second
+    const interval = setInterval(updateCountdown, 1000);
 
     onDestroy(() => {
         clearInterval(interval);

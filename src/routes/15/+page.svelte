@@ -45,16 +45,15 @@
     }
 
     .globe {
-        margin: 1rem 0;
+        margin: 2rem auto;
         position: relative;
         overflow: hidden;
 
+        transform: scale(1.1);
         border-radius: 50%;
         width: min(100%, 25rem);
         aspect-ratio: 1/1;
-
-        background-color: #0001;
-        box-shadow: 0 0 10px 1px #0003;
+        box-shadow: inset 0 0 10px 1px #0003;
     }
     .globe > img {
         position: relative;
@@ -62,5 +61,6 @@
         height: 100%;
         width: 100%;
         object-fit: cover;
+        filter: brightness(0.8);
     }
 </style>
